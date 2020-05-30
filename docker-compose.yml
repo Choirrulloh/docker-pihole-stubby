@@ -1,6 +1,6 @@
 version: "3"
 
-# pihole want ip of dns resolver, not hostname of stubby, i had to define static ip to them.
+# pihole wants ip of dns resolver, not hostname of stubby, i had to define static ip to them.
 networks:
     frontend:
       ipam:
@@ -24,7 +24,7 @@ services:
     environment:
       TZ: 'Europe/Istanbul'  # replace with your time zone
       # WEBPASSWORD: 'set a secure password here or it will be random'
-      # docker exec -it pihole pihole -a -p -    ## then enter your password into the prompt
+      # "docker exec -it pihole pihole -a -p"    ## then enter your password into the prompt
     # Volumes store your data between container upgrades
     volumes:
        - './etc-pihole/:/etc/pihole/'
@@ -40,12 +40,13 @@ services:
 
   stubby:
     container_name: stubby
+    #use latest tag for linux/amd64 build
     image: emre1393/stubby:rpi4b
     networks:
         frontend:
             ipv4_address: 172.20.0.10
     ports:
-      - 5353:53
+      - "5053:53/udp"
     environment:
         TZ: 'Europe/Istanbul'
     dns:
