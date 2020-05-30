@@ -14,4 +14,4 @@ LABEL image="emre1393/stubby:latest"
 
 HEALTHCHECK CMD dig +norecurse +retry=0 @127.0.0.1 cloudflare || exit 1
 
-CMD ["/bin/sh", "-c", "/usr/bin/stubby -v $LOG_LEVEL"]
+CMD ["/bin/sh", "-c", "/usr/bin/stubby -v $LOG_LEVEL -C /etc/stubby/stubby.yml"]
