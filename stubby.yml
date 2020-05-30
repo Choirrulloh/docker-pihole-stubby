@@ -121,7 +121,7 @@ tls_max_version: GETDNS_TLS1_3
 # and IPv6. It will listen on port 53 by default. Use <IP_address>@<port> to
 # specify a different port
 listen_addresses:
-  - 127.0.0.1
+  - 0.0.0.0
 #  - 0::1
 
 ############################### DNSSEC SETTINGS ################################
