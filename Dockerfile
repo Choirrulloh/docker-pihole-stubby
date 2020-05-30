@@ -1,9 +1,10 @@
-FROM multiarch/debian-debootstrap:armhf-buster-slim
+FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
 ENV LOG_LEVEL 0
 
-RUN apt update && apt install -y --no-install-recommends ca-certificates stubby dnsutils
+RUN apt update && \
+    apt install -y --no-install-recommends ca-certificates stubby dnsutils
 
 COPY stubby.yml /etc/stubby/
 
