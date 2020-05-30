@@ -2,21 +2,23 @@ version: "3"
 
 # pihole wants ip of dns resolver, not hostname of stubby, i had to define static ip to them.
 networks:
-    frontend:
+    pihole:
       ipam:
         config:
           - subnet: 172.20.0.0/24
 
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
+#sudo systemctl disable systemd-resolved.service
+#sudo systemctl stop systemd-resolved
 services:
   pihole:
     container_name: pihole
     image: pihole/pihole:beta-v5.0  # pihole/pihole:latest for latest non beta version.
     networks:
-        frontend:
+        pihole:
             ipv4_address: 172.20.0.5
     ports:
-      - "53:53/tcp"
+      - "53:53/tcp"  # you must disable and stop systemd-resolved first, otherwise it can't bind this port. 
       - "53:53/udp"
       - "67:67/udp"
       - "8880:80/tcp"  # i'll use a nginx reverse proxy for my container
@@ -40,10 +42,10 @@ services:
 
   stubby:
     container_name: stubby
-    #use latest tag for linux/amd64 build
+    #use latest tag for linux/amd64 build, use rpi4b tag for linux/arm
     image: emre1393/stubby:rpi4b
     networks:
-        frontend:
+        pihole:
             ipv4_address: 172.20.0.10
     ports:
       - "5053:53/udp"
