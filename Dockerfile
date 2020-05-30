@@ -1,7 +1,7 @@
 FROM debian:buster-slim
 
 ARG DEBIAN_FRONTEND=noninteractive
-ENV LOG_LEVEL 0
+ENV LOG_LEVEL 3
 
 RUN apt update && \
     apt install -y --no-install-recommends ca-certificates stubby dnsutils
