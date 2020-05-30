@@ -42,8 +42,8 @@ services:
 
   stubby:
     container_name: stubby
-    #use latest tag for linux/amd64 build, use rpi4b tag for linux/arm
-    image: emre1393/stubby:rpi4b
+    #use latest tag for linux/amd64 build, use raspberry tag for linux/arm
+    image: emre1393/stubby:raspberry
     networks:
         pihole:
             ipv4_address: 172.20.0.10
